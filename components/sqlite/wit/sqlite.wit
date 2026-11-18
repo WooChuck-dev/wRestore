@@ -1,0 +1,14 @@
+package wrestore:sqlite@0.1.0;
+
+interface db {
+    /// Opens (creating if needed) a database at a WASI path such as "data/wrestore.db".
+    open: func(path: string) -> result<u32, string>;
+    exec: func(handle: u32, sql: string) -> result<_, string>;
+    /// Rows joined by '\n', columns by '\t'; '\', '\t', '\n' escaped; NULL as "\N". Spike encoding.
+    query: func(handle: u32, sql: string) -> result<string, string>;
+    close: func(handle: u32);
+}
+
+world sqlite {
+    export db;
+}

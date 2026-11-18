@@ -1,0 +1,7 @@
+.gradle/
+build/
+.kotlin/
+*.wasm
+local.properties
+.idea/
+!components/sqlite/sqlite-comp.wasm

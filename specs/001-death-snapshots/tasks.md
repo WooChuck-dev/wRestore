@@ -1,0 +1,16 @@
+# Tasks
+- [x] T1 Research Pumpkin plugin ABI (research.md)
+- [x] T2 Read host death-event dispatch: is inventory already cleared when `player-death-event` fires? (D-007)
+- [x] T3 G0 decision: pumpkin-api-kt
+- [x] T4 JDK 21 + Gradle wrapper; build Kotlin `wasmWasi` hello
+- [x] T5 (user confirmed "wRestore loaded" on real server) Componentize hello with wasm-tools; load in Pumpkin (v0.1 ABI)
+- [x] T6 SQLite PoC (G1) PASSED on real server, see spike-g1.md
+- [x] T7 Domain model, versioned codec, SnapshotRepository (+SQL impl), retention, config parsing: `domain` module, 21 unit tests pass (wasmWasiNodeTest). SQL repo NOT yet exercised: needs live test on server.
+- [x] T7b Gradle integration: `./gradlew clean build` from scratch -> validated `build/wRestore.wasm` (1,849,945 B) with SQLite composed in; runs domain tests. Standard plugin assemble replaced (see build.gradle.kts).
+- [x] T7c(capture half) Pumpkin adapters: SqlExecutor over Sqlite import, Capture (items via get-components, XP, keepInventory game rule), WASI clock/uuid, config.toml loader, repository self-test at load, death listener. Compiles; NOT yet verified on a server.
+- [x] T7d Restore direction (Capture.apply: build stacks first, clear+set inventory, XP level+points-in-level, read-back verification). Compiles; NOT yet verified on a server.
+- [x] T8 (owner reports "It works" for the history/inspect/apply/confirm flow on a real server; individual scenarios below still need explicit confirmation) Death listener VERIFIED on server (items=0 and items=6 deaths saved). Commands /restore history|inspect|apply|confirm|cancel, RestoreService (confirmation, recovery point, rollback, audit) written; domain logic has 15 unit tests (pass); command layer + restore NOT yet verified on a server.
+- [ ] T9 Config validation; tests per spec
+- [x] T10 Live scenario matrix, owner-reported on a real server (2026-11-18): rows 1-14 OK (death capture, history numbering, #N/latest/prefix refs, full restore incl. enchants/armor/offhand/XP, single-use confirm, expiry, offline rejection, logout before confirm, non-op denied, recovery point, keepInventory, limit lowering, invalid config, empty inventory); row 15: Tab no longer crashes, no completion by design (host bug, see research.md).
+- [x] T11a License: MIT OR Apache-2.0 (own MIT text with neutral holder, standard Apache text), THIRD_PARTY.md.
+- [ ] T11b Replace deprecated `wasm-tools compose` with `wac` (needs a tool download; compose is pinned at wasm-tools 1.258.0 so it keeps working until that pin is bumped).
